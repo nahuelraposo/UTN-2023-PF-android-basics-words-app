@@ -15,7 +15,6 @@
  */
 package com.example.wordsapp
 
-import android.content.Intent
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -51,8 +50,9 @@ class LetterAdapter :
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LetterViewHolder {
         val layout = LayoutInflater
-                .from(parent.context)
-                .inflate(R.layout.item_view, parent, false)
+            .from(parent.context)
+            .inflate(R.layout.item_view, parent, false)
+
         // Setup custom accessibility delegate to set the text read
         layout.accessibilityDelegate = Accessibility
         return LetterViewHolder(layout)
@@ -65,8 +65,12 @@ class LetterAdapter :
         val item = list.get(position)
         holder.button.text = item.toString()
 
+        // Assigns a [OnClickListener] to the button contained in the [ViewHolder]
         holder.button.setOnClickListener {
+            // Create an action from WordList to DetailList
+            // using the required arguments
             val action = LetterListFragmentDirections.actionLetterListFragmentToWordListFragment(letter = holder.button.text.toString())
+            // Navigate using that action
             holder.view.findNavController().navigate(action)
         }
     }
